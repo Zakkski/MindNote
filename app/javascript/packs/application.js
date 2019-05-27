@@ -13,7 +13,8 @@ const outputToScreen = (songs) => {
   if (songs) {
     songs.forEach((song) => {
       resultList.insertAdjacentHTML('beforeend',
-        `<form action="/songs" method='post'> <input type="hidden" name="album_url" value='${song['collectionViewUrl']}'>
+        `<form action="/songs" method='post'>
+        <input type="hidden" name="album_url" value='${song['collectionViewUrl']}'>
         <input type="text" name="title" value='${song['trackName']}'>
         <input type="text" name="artist" value='${song['artistName']}'>
         <input type="submit">`
