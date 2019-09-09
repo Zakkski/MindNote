@@ -26,9 +26,9 @@
     <div class="mn-avatar">
       <div class="avatar-info">
         <% if current_user.photo %>
-        <%= cl_image_tag current_user.photo, class: "profile-photo"%>
+          <%= cl_image_tag current_user.photo, class: "profile-photo"%>
         <% else %>
-        <img src="https://picsum.photos/200/200" alt="profile">
+          <img src="https://picsum.photos/200/200" alt="profile">
         <% end %>
         <h3><%= current_user.name %></h3>
       </div>

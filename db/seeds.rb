@@ -10,6 +10,10 @@ puts "Creating user..."
 u = User.new(email: "user@email.com", name: "user", password: "password", photo: "image/upload/v1559149365/dxf4dzbrhukthuxjkhnx.jpg")
 u.save!
 
+puts "Creating Playlist"
+p = Playlist.create(name: "Main Playlist", user: u)
+u.update(current_playlist: p.id)
+
 puts "Creating artist..."
 a = Artist.new(name: "Relient K")
 a.save!
@@ -38,8 +42,6 @@ s6 = Song.new(title: "The Power of Love", artist: celine, album_url: "https://is
 
 puts " 6 songs created"
 
-puts "Creating Playlist"
-p = Playlist.create(name: "Main Playlist", user: u)
 
 puts "Creating Practices..."
 Practice.create!(playlist: p, song: s)

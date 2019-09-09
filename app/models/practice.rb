@@ -19,9 +19,9 @@ class Practice < ApplicationRecord
     0 => -0.8
   }.freeze
 
-  def self.urgent_songs(user_id)
-    user = User.find(user_id)
-    practices = user.practices
+  def self.urgent_songs(playlist_id)
+    current_playlist = Playlist.find(playlist_id)
+    practices = current_playlist.practices
 
     return practices = [] if practices.empty?
 
