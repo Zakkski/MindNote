@@ -1,9 +1,11 @@
 class Practice < ApplicationRecord
-  belongs_to :user
+  belongs_to :playlist
   has_many :sessions
   has_many :notes
   belongs_to :song
-  validates :song, uniqueness: { scope: :user_id, message: "You have already added this song" }
+  # validates :song, uniqueness: { scope: :user_id, message: "You have already added this song" }
+  validates :song, uniqueness: { scope: :playlist_id, message: "You have already added this song to this playlist" }
+
 
 
   MAX_GRADE = 5

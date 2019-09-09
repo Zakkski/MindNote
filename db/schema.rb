@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_093519) do
+ActiveRecord::Schema.define(version: 2019_09_09_164256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,18 +29,26 @@ ActiveRecord::Schema.define(version: 2019_06_03_093519) do
     t.index ["practice_id"], name: "index_notes_on_practice_id"
   end
 
+  create_table "playlists", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_playlists_on_user_id"
+  end
+
   create_table "practices", force: :cascade do |t|
     t.boolean "active", default: false
     t.float "easiness_factor", default: 2.5
     t.integer "repetition", default: 0
     t.integer "interval", default: 0
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "song_id"
     t.integer "importance", default: 0
+    t.bigint "playlist_id"
+    t.index ["playlist_id"], name: "index_practices_on_playlist_id"
     t.index ["song_id"], name: "index_practices_on_song_id"
-    t.index ["user_id"], name: "index_practices_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -76,8 +84,9 @@ ActiveRecord::Schema.define(version: 2019_06_03_093519) do
   end
 
   add_foreign_key "notes", "practices"
+  add_foreign_key "playlists", "users"
+  add_foreign_key "practices", "playlists"
   add_foreign_key "practices", "songs"
-  add_foreign_key "practices", "users"
   add_foreign_key "sessions", "practices"
   add_foreign_key "songs", "artists"
 end

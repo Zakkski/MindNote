@@ -1,7 +1,7 @@
 
 puts "Clearing Database..."
 Session.destroy_all
-Practice.destroy_all
+Playlist.destroy_all
 Song.destroy_all
 Artist.destroy_all
 User.destroy_all
@@ -38,12 +38,15 @@ s6 = Song.new(title: "The Power of Love", artist: celine, album_url: "https://is
 
 puts " 6 songs created"
 
+puts "Creating Playlist"
+p = Playlist.create(name: "Main Playlist", user: u)
+
 puts "Creating Practices..."
-Practice.create!(user: u, song: s)
-Practice.create!(user: u, song: s2)
-Practice.create!(user: u, song: s3)
-Practice.create!(user: u, song: s4)
-Practice.create!(user: u, song: s5)
-Practice.create!(user: u, song: s6)
+Practice.create!(playlist: p, song: s)
+Practice.create!(playlist: p, song: s2)
+Practice.create!(playlist: p, song: s3)
+Practice.create!(playlist: p, song: s4)
+Practice.create!(playlist: p, song: s5)
+Practice.create!(playlist: p, song: s6)
 puts "6 practices created"
 puts "Seed complete!"
