@@ -1,5 +1,5 @@
 <%= render 'shared/navbar' %>
-<%#= image_tag asset_path("mind-note-colored") %>
+<%= @playlist.name %>
 <%= render "practice_card", practice: @first  %>
 <div class="practice-queue">
   <% if !@songs_due.first.nil? %>

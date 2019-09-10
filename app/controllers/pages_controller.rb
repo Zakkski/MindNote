@@ -7,6 +7,7 @@ class PagesController < ApplicationController
       current_user.current_playlist = p.id
       # current_user.Practices.each { |practice| practice.update(practice: p) }
     end
+    @playlist = Playlist.find(current_user.current_playlist)
     @songs_due = Practice.urgent_songs(current_user.current_playlist)
     @first = @songs_due.first
   end

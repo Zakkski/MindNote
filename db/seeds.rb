@@ -10,8 +10,9 @@ puts "Creating user..."
 u = User.new(email: "user@email.com", name: "user", password: "password", photo: "image/upload/v1559149365/dxf4dzbrhukthuxjkhnx.jpg")
 u.save!
 
-puts "Creating Playlist"
+puts "Creating Playlists"
 p = Playlist.create(name: "Main Playlist", user: u)
+p2 = Playlist.create(name: "Second Playlist", user: u)
 u.update(current_playlist: p.id)
 
 puts "Creating artist..."
@@ -44,11 +45,18 @@ puts " 6 songs created"
 
 
 puts "Creating Practices..."
-Practice.create!(playlist: p, song: s)
-Practice.create!(playlist: p, song: s2)
-Practice.create!(playlist: p, song: s3)
-Practice.create!(playlist: p, song: s4)
-Practice.create!(playlist: p, song: s5)
-Practice.create!(playlist: p, song: s6)
+prac = Practice.create!(playlist: p, song: s, interval: 1, active: true)
+prac2 = Practice.create!(playlist: p, song: s2, interval: 1, active: true)
+prac3 = Practice.create!(playlist: p, song: s3, interval: 1)
+prac4 = Practice.create!(playlist: p2, song: s4, interval: 1, active: true)
+prac5 = Practice.create!(playlist: p2, song: s5, interval: 1, active: true)
+prac6 = Practice.create!(playlist: p2, song: s6, interval: 1)
 puts "6 practices created"
+
+puts "Creating Sessions"
+sess = Session.create!(practice: prac, time: 1409, grade: 3)
+sess2 = Session.create!(practice: prac2, time: 1409, grade: 3)
+sess4 = Session.create!(practice: prac4, time: 1409, grade: 3)
+sess5 = Session.create!(practice: prac5, time: 1409, grade: 3)
+Session.all.each { |session| session.update_attributes(created_at: 1.years.ago) }
 puts "Seed complete!"
