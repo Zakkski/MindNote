@@ -21,6 +21,6 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create]
   end
 
-  resources :playlists, only: [:index, :show, :create]
+  resources :import_playlists, only: [:index, :show, :create]
   resources :imports, only: :index
 end

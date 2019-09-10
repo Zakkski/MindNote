@@ -1,4 +1,4 @@
-class PlaylistsController < ApplicationController
+class ImportPlaylistsController < ApplicationController
   def index
   end
 
