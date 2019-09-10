@@ -20,7 +20,11 @@ Rails.application.routes.draw do
     end
     resources :sessions, only: [:create]
   end
-
+  resources :playlists, only: [:index] do
+    member do
+      patch "select"
+    end
+  end
   resources :import_playlists, only: [:index, :show, :create]
   resources :imports, only: :index
 end
