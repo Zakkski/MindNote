@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
     resources :sessions, only: [:create]
   end
-  resources :playlists, only: [:index] do
+  resources :playlists, only: [:index, :create] do
     member do
       patch "select"
     end
