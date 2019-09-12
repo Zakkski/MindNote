@@ -24,6 +24,7 @@ class SongsController < ApplicationController
     if params[:radios].nil?
       redirect_to root_path
     else
+      playlist = Playlist.find(current_user.current_playlist)
       song_data = JSON.parse(params[:radios])
       artist = Artist.find_or_create_by(name: song_data["artistName"])
       album = song_data["artworkUrl100"]
@@ -33,7 +34,7 @@ class SongsController < ApplicationController
 
       song = Song.create(title: song_data["trackName"], artist: artist, album_url: album) if song.nil?
 
-      practice = Practice.new(user: current_user, song: song)
+      practice = Practice.new(playlist: playlist, song: song)
 
       if practice.save
         flash.notice = "You added #{practice.song.title} to your list"
