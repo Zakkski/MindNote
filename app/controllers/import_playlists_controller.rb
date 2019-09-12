@@ -20,6 +20,7 @@ class ImportPlaylistsController < ApplicationController
     else
       data = params[:songs]
       @songs = data.map { |song| JSON.parse(song) }
+      playlist = Playlist.find(current_user.current_playlist)
       # raise
       @songs.each do |song_data|
         artist = Artist.find_or_create_by(name: song_data["artist"])
@@ -27,9 +28,9 @@ class ImportPlaylistsController < ApplicationController
 
         song = Song.create(title: song_data["name"], artist: artist, album_url: song_data["url"]) if song.nil?
 
-        Practice.create(user: current_user, song: song)
+        Practice.create(playlist: playlist, song: song)
       end
-      flash.notice = "You Imported #{@songs.count} Songs"
+      flash.notice = "You Imported #{@songs.count} Songs into #{playlist.name}"
       redirect_to :root
     end
   rescue JSON::ParserError => e

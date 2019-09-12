@@ -1,5 +1,5 @@
 <%= render 'shared/navbar' %>
-<%= form_tag("/playlists", method: "post", class: "playlist-songs") do %>
+<%= form_tag("/import_playlists", method: "post", class: "playlist-songs") do %>
   <h1>Songs</h1>
   <% incrementor = 0 %>
   <% @songs.each do |song| %>
